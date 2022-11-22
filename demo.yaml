@@ -1,0 +1,90 @@
+---
+openapi: 3.0.2
+info:
+  title: demo
+  version: 1.0.0
+  description: blah blah
+paths:
+  /personnes-physiques:
+    get:
+      parameters:
+      - name: statut
+        description: Statut de la personne physique
+        schema:
+          type: string
+        in: query
+      - name: date-naisance
+        description: ""
+        schema:
+          format: date
+          type: string
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonnePhysiqueDTO'
+          description: Liste finie de PP
+        "204":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonnePhysiqueDTO'
+          description: Pas de PP trouvées
+        "206":
+          headers:
+            x-current-page: {}
+            x-current-size: {}
+            x-total-count: {}
+            x-total-page: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonnePhysiqueDTO'
+          description: page
+      description: j hgldsfjh glhds
+components:
+  schemas:
+    PersonnePhysiqueDTO:
+      title: Root Type for PersonnePhysiqueDTO
+      description: ""
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        prenom:
+          type: string
+        nom:
+          type: string
+        dateNaissance:
+          format: date
+          type: string
+        statut:
+          type: string
+      example:
+        id: 1
+        prenom: toto
+        nom: tata
+        dateNaissance: 1912-06-23
+        statut: CLIENT
+    ArrayPP:
+      title: Root Type for ArrayPP
+      description: liste de PP
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        nom:
+          type: string
+      example:
+        id: 1
+        nom: toto
